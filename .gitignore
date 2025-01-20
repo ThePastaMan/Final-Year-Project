@@ -1,0 +1,21 @@
+# Ignore Quartus-specific files
+*.qdb          # Database files
+*.qpf          # Quartus Project File
+*.qsf          # Quartus Settings File
+*.rpt          # Report files
+*.db           # Temporary database files
+*.sdo          # Synthesis Data Output
+*.qar          # Archive files
+
+# Ignore backup files
+*~              # Backup file from editors (e.g., vim, emacs)
+*.bak           # Backup file extensions
+*.swp           # Swap files (e.g., vim swap files)
+
+# Ignore IDE and editor settings
+.idea/          # IntelliJ-based IDEs
+.vscode/        # Visual Studio Code settings
+
+# Ignore OS-specific files
+.DS_Store       # macOS system file
+Thumbs.db       # Windows thumbnail cache
