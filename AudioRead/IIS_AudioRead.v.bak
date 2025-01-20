@@ -1,0 +1,24 @@
+module audioReader (
+input wire clk;
+input wire wrdclk;
+input wire data;
+
+output reg audioL;
+output reg audioR;
+);
+
+always @(posedge clk) begin
+	if (wrdclk == 0) 
+		begin audioR <= data;
+		end
+	else
+		begin audioL <= data;
+		end
+end
+endmodule
+
+module audioReadTB
+
+
+
+endmodule

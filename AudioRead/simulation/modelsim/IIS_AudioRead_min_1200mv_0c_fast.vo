@@ -1,0 +1,2911 @@
+// Copyright (C) 1991-2013 Altera Corporation
+// Your use of Altera Corporation's design tools, logic functions 
+// and other software and tools, and its AMPP partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Altera Program License 
+// Subscription Agreement, Altera MegaCore Function License 
+// Agreement, or other applicable license agreement, including, 
+// without limitation, that your use is for the sole purpose of 
+// programming logic devices manufactured by Altera and sold by 
+// Altera or its authorized distributors.  Please refer to the 
+// applicable agreement for further details.
+
+// VENDOR "Altera"
+// PROGRAM "Quartus II 64-Bit"
+// VERSION "Version 13.1.0 Build 162 10/23/2013 SJ Web Edition"
+
+// DATE "01/20/2025 14:44:12"
+
+// 
+// Device: Altera EP3C25F324C6 Package FBGA324
+// 
+
+// 
+// This Verilog file should be used for ModelSim-Altera (Verilog) only
+// 
+
+`timescale 1 ps/ 1 ps
+
+module audioReader (
+	sclk,
+	wrdclk,
+	data,
+	audioL,
+	audioR,
+	audioM);
+input 	sclk;
+input 	wrdclk;
+input 	data;
+output 	[15:0] audioL;
+output 	[15:0] audioR;
+output 	[15:0] audioM;
+
+// Design Ports Information
+// audioL[0]	=>  Location: PIN_A2,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioL[1]	=>  Location: PIN_D2,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioL[2]	=>  Location: PIN_B1,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioL[3]	=>  Location: PIN_A1,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioL[4]	=>  Location: PIN_K2,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioL[5]	=>  Location: PIN_C3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioL[6]	=>  Location: PIN_K1,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioL[7]	=>  Location: PIN_K5,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioL[8]	=>  Location: PIN_E6,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioL[9]	=>  Location: PIN_D5,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioL[10]	=>  Location: PIN_F7,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioL[11]	=>  Location: PIN_E1,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioL[12]	=>  Location: PIN_H2,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioL[13]	=>  Location: PIN_C2,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioL[14]	=>  Location: PIN_G6,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioL[15]	=>  Location: PIN_G2,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioR[0]	=>  Location: PIN_C1,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioR[1]	=>  Location: PIN_L2,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioR[2]	=>  Location: PIN_F6,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioR[3]	=>  Location: PIN_B2,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioR[4]	=>  Location: PIN_E7,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioR[5]	=>  Location: PIN_L4,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioR[6]	=>  Location: PIN_L1,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioR[7]	=>  Location: PIN_L3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioR[8]	=>  Location: PIN_B3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioR[9]	=>  Location: PIN_H1,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioR[10]	=>  Location: PIN_B4,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioR[11]	=>  Location: PIN_A3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioR[12]	=>  Location: PIN_G1,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioR[13]	=>  Location: PIN_F8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioR[14]	=>  Location: PIN_D3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioR[15]	=>  Location: PIN_L5,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioM[0]	=>  Location: PIN_U13,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioM[1]	=>  Location: PIN_A18,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioM[2]	=>  Location: PIN_C14,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioM[3]	=>  Location: PIN_T14,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioM[4]	=>  Location: PIN_T3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioM[5]	=>  Location: PIN_N8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioM[6]	=>  Location: PIN_B5,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioM[7]	=>  Location: PIN_H15,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioM[8]	=>  Location: PIN_U2,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioM[9]	=>  Location: PIN_U5,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioM[10]	=>  Location: PIN_B18,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioM[11]	=>  Location: PIN_M2,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioM[12]	=>  Location: PIN_N10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioM[13]	=>  Location: PIN_H17,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioM[14]	=>  Location: PIN_E14,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// audioM[15]	=>  Location: PIN_R3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// sclk	=>  Location: PIN_F3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// wrdclk	=>  Location: PIN_H6,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// data	=>  Location: PIN_L6,	 I/O Standard: 2.5 V,	 Current Strength: Default
+
+
+wire gnd;
+wire vcc;
+wire unknown;
+
+assign gnd = 1'b0;
+assign vcc = 1'b1;
+assign unknown = 1'bx;
+
+tri1 devclrn;
+tri1 devpor;
+tri1 devoe;
+// synopsys translate_off
+initial $sdf_annotate("IIS_AudioRead_min_1200mv_0c_v_fast.sdo");
+// synopsys translate_on
+
+wire \audioL[0]~output_o ;
+wire \audioL[1]~output_o ;
+wire \audioL[2]~output_o ;
+wire \audioL[3]~output_o ;
+wire \audioL[4]~output_o ;
+wire \audioL[5]~output_o ;
+wire \audioL[6]~output_o ;
+wire \audioL[7]~output_o ;
+wire \audioL[8]~output_o ;
+wire \audioL[9]~output_o ;
+wire \audioL[10]~output_o ;
+wire \audioL[11]~output_o ;
+wire \audioL[12]~output_o ;
+wire \audioL[13]~output_o ;
+wire \audioL[14]~output_o ;
+wire \audioL[15]~output_o ;
+wire \audioR[0]~output_o ;
+wire \audioR[1]~output_o ;
+wire \audioR[2]~output_o ;
+wire \audioR[3]~output_o ;
+wire \audioR[4]~output_o ;
+wire \audioR[5]~output_o ;
+wire \audioR[6]~output_o ;
+wire \audioR[7]~output_o ;
+wire \audioR[8]~output_o ;
+wire \audioR[9]~output_o ;
+wire \audioR[10]~output_o ;
+wire \audioR[11]~output_o ;
+wire \audioR[12]~output_o ;
+wire \audioR[13]~output_o ;
+wire \audioR[14]~output_o ;
+wire \audioR[15]~output_o ;
+wire \audioM[0]~output_o ;
+wire \audioM[1]~output_o ;
+wire \audioM[2]~output_o ;
+wire \audioM[3]~output_o ;
+wire \audioM[4]~output_o ;
+wire \audioM[5]~output_o ;
+wire \audioM[6]~output_o ;
+wire \audioM[7]~output_o ;
+wire \audioM[8]~output_o ;
+wire \audioM[9]~output_o ;
+wire \audioM[10]~output_o ;
+wire \audioM[11]~output_o ;
+wire \audioM[12]~output_o ;
+wire \audioM[13]~output_o ;
+wire \audioM[14]~output_o ;
+wire \audioM[15]~output_o ;
+wire \sclk~input_o ;
+wire \data~input_o ;
+wire \sample[0]~feeder_combout ;
+wire \audioL[0]~reg0feeder_combout ;
+wire \bitCount[0]~3_combout ;
+wire \bitCount[1]~2_combout ;
+wire \bitCount[2]~1_combout ;
+wire \bitCount[3]~0_combout ;
+wire \wrdclk~input_o ;
+wire \audioL[0]~0_combout ;
+wire \audioL[0]~1_combout ;
+wire \audioL[0]~reg0_q ;
+wire \sample[1]~feeder_combout ;
+wire \audioL[1]~reg0feeder_combout ;
+wire \audioL[1]~reg0_q ;
+wire \sample[2]~feeder_combout ;
+wire \audioL[2]~reg0_q ;
+wire \sample[3]~feeder_combout ;
+wire \audioL[3]~reg0feeder_combout ;
+wire \audioL[3]~reg0_q ;
+wire \sample[4]~feeder_combout ;
+wire \audioL[4]~reg0feeder_combout ;
+wire \audioL[4]~reg0_q ;
+wire \sample[5]~feeder_combout ;
+wire \audioL[5]~reg0feeder_combout ;
+wire \audioL[5]~reg0_q ;
+wire \sample[6]~feeder_combout ;
+wire \audioL[6]~reg0_q ;
+wire \sample[7]~feeder_combout ;
+wire \audioL[7]~reg0feeder_combout ;
+wire \audioL[7]~reg0_q ;
+wire \sample[8]~feeder_combout ;
+wire \audioL[8]~reg0feeder_combout ;
+wire \audioL[8]~reg0_q ;
+wire \sample[9]~feeder_combout ;
+wire \audioL[9]~reg0feeder_combout ;
+wire \audioL[9]~reg0_q ;
+wire \sample[10]~feeder_combout ;
+wire \audioL[10]~reg0feeder_combout ;
+wire \audioL[10]~reg0_q ;
+wire \sample[11]~feeder_combout ;
+wire \audioL[11]~reg0feeder_combout ;
+wire \audioL[11]~reg0_q ;
+wire \sample[12]~feeder_combout ;
+wire \audioL[12]~reg0feeder_combout ;
+wire \audioL[12]~reg0_q ;
+wire \sample[13]~feeder_combout ;
+wire \audioL[13]~reg0feeder_combout ;
+wire \audioL[13]~reg0_q ;
+wire \sample[14]~feeder_combout ;
+wire \audioL[14]~reg0feeder_combout ;
+wire \audioL[14]~reg0_q ;
+wire \sample[15]~feeder_combout ;
+wire \audioL[15]~reg0feeder_combout ;
+wire \audioL[15]~reg0_q ;
+wire \audioR[0]~reg0feeder_combout ;
+wire \audioR[0]~0_combout ;
+wire \audioR[0]~1_combout ;
+wire \audioR[0]~reg0_q ;
+wire \audioR[1]~reg0feeder_combout ;
+wire \audioR[1]~reg0_q ;
+wire \audioR[2]~reg0feeder_combout ;
+wire \audioR[2]~reg0_q ;
+wire \audioR[3]~reg0feeder_combout ;
+wire \audioR[3]~reg0_q ;
+wire \audioR[4]~reg0feeder_combout ;
+wire \audioR[4]~reg0_q ;
+wire \audioR[5]~reg0feeder_combout ;
+wire \audioR[5]~reg0_q ;
+wire \audioR[6]~reg0feeder_combout ;
+wire \audioR[6]~reg0_q ;
+wire \audioR[7]~reg0feeder_combout ;
+wire \audioR[7]~reg0_q ;
+wire \audioR[8]~reg0feeder_combout ;
+wire \audioR[8]~reg0_q ;
+wire \audioR[9]~reg0feeder_combout ;
+wire \audioR[9]~reg0_q ;
+wire \audioR[10]~reg0feeder_combout ;
+wire \audioR[10]~reg0_q ;
+wire \audioR[11]~reg0feeder_combout ;
+wire \audioR[11]~reg0_q ;
+wire \audioR[12]~reg0feeder_combout ;
+wire \audioR[12]~reg0_q ;
+wire \audioR[13]~reg0feeder_combout ;
+wire \audioR[13]~reg0_q ;
+wire \audioR[14]~reg0feeder_combout ;
+wire \audioR[14]~reg0_q ;
+wire \audioR[15]~reg0feeder_combout ;
+wire \audioR[15]~reg0_q ;
+wire [15:0] sample;
+wire [3:0] bitCount;
+
+
+// Location: IOOBUF_X1_Y34_N9
+cycloneiii_io_obuf \audioL[0]~output (
+	.i(\audioL[0]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioL[0]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioL[0]~output .bus_hold = "false";
+defparam \audioL[0]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y27_N2
+cycloneiii_io_obuf \audioL[1]~output (
+	.i(\audioL[1]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioL[1]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioL[1]~output .bus_hold = "false";
+defparam \audioL[1]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y30_N9
+cycloneiii_io_obuf \audioL[2]~output (
+	.i(\audioL[2]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioL[2]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioL[2]~output .bus_hold = "false";
+defparam \audioL[2]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X1_Y34_N2
+cycloneiii_io_obuf \audioL[3]~output (
+	.i(\audioL[3]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioL[3]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioL[3]~output .bus_hold = "false";
+defparam \audioL[3]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y15_N2
+cycloneiii_io_obuf \audioL[4]~output (
+	.i(\audioL[4]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioL[4]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioL[4]~output .bus_hold = "false";
+defparam \audioL[4]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y28_N2
+cycloneiii_io_obuf \audioL[5]~output (
+	.i(\audioL[5]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioL[5]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioL[5]~output .bus_hold = "false";
+defparam \audioL[5]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y15_N9
+cycloneiii_io_obuf \audioL[6]~output (
+	.i(\audioL[6]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioL[6]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioL[6]~output .bus_hold = "false";
+defparam \audioL[6]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y14_N2
+cycloneiii_io_obuf \audioL[7]~output (
+	.i(\audioL[7]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioL[7]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioL[7]~output .bus_hold = "false";
+defparam \audioL[7]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X7_Y34_N9
+cycloneiii_io_obuf \audioL[8]~output (
+	.i(\audioL[8]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioL[8]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioL[8]~output .bus_hold = "false";
+defparam \audioL[8]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X3_Y34_N2
+cycloneiii_io_obuf \audioL[9]~output (
+	.i(\audioL[9]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioL[9]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioL[9]~output .bus_hold = "false";
+defparam \audioL[9]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X7_Y34_N16
+cycloneiii_io_obuf \audioL[10]~output (
+	.i(\audioL[10]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioL[10]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioL[10]~output .bus_hold = "false";
+defparam \audioL[10]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y25_N9
+cycloneiii_io_obuf \audioL[11]~output (
+	.i(\audioL[11]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioL[11]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioL[11]~output .bus_hold = "false";
+defparam \audioL[11]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y23_N16
+cycloneiii_io_obuf \audioL[12]~output (
+	.i(\audioL[12]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioL[12]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioL[12]~output .bus_hold = "false";
+defparam \audioL[12]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y29_N2
+cycloneiii_io_obuf \audioL[13]~output (
+	.i(\audioL[13]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioL[13]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioL[13]~output .bus_hold = "false";
+defparam \audioL[13]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X1_Y34_N23
+cycloneiii_io_obuf \audioL[14]~output (
+	.i(\audioL[14]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioL[14]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioL[14]~output .bus_hold = "false";
+defparam \audioL[14]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y24_N23
+cycloneiii_io_obuf \audioL[15]~output (
+	.i(\audioL[15]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioL[15]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioL[15]~output .bus_hold = "false";
+defparam \audioL[15]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y29_N9
+cycloneiii_io_obuf \audioR[0]~output (
+	.i(\audioR[0]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioR[0]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioR[0]~output .bus_hold = "false";
+defparam \audioR[0]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y13_N16
+cycloneiii_io_obuf \audioR[1]~output (
+	.i(\audioR[1]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioR[1]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioR[1]~output .bus_hold = "false";
+defparam \audioR[1]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X5_Y34_N16
+cycloneiii_io_obuf \audioR[2]~output (
+	.i(\audioR[2]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioR[2]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioR[2]~output .bus_hold = "false";
+defparam \audioR[2]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y30_N2
+cycloneiii_io_obuf \audioR[3]~output (
+	.i(\audioR[3]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioR[3]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioR[3]~output .bus_hold = "false";
+defparam \audioR[3]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X9_Y34_N9
+cycloneiii_io_obuf \audioR[4]~output (
+	.i(\audioR[4]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioR[4]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioR[4]~output .bus_hold = "false";
+defparam \audioR[4]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y12_N2
+cycloneiii_io_obuf \audioR[5]~output (
+	.i(\audioR[5]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioR[5]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioR[5]~output .bus_hold = "false";
+defparam \audioR[5]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y13_N23
+cycloneiii_io_obuf \audioR[6]~output (
+	.i(\audioR[6]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioR[6]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioR[6]~output .bus_hold = "false";
+defparam \audioR[6]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y12_N9
+cycloneiii_io_obuf \audioR[7]~output (
+	.i(\audioR[7]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioR[7]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioR[7]~output .bus_hold = "false";
+defparam \audioR[7]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X7_Y34_N2
+cycloneiii_io_obuf \audioR[8]~output (
+	.i(\audioR[8]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioR[8]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioR[8]~output .bus_hold = "false";
+defparam \audioR[8]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y23_N23
+cycloneiii_io_obuf \audioR[9]~output (
+	.i(\audioR[9]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioR[9]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioR[9]~output .bus_hold = "false";
+defparam \audioR[9]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X11_Y34_N2
+cycloneiii_io_obuf \audioR[10]~output (
+	.i(\audioR[10]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioR[10]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioR[10]~output .bus_hold = "false";
+defparam \audioR[10]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X9_Y34_N23
+cycloneiii_io_obuf \audioR[11]~output (
+	.i(\audioR[11]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioR[11]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioR[11]~output .bus_hold = "false";
+defparam \audioR[11]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y23_N2
+cycloneiii_io_obuf \audioR[12]~output (
+	.i(\audioR[12]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioR[12]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioR[12]~output .bus_hold = "false";
+defparam \audioR[12]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X9_Y34_N16
+cycloneiii_io_obuf \audioR[13]~output (
+	.i(\audioR[13]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioR[13]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioR[13]~output .bus_hold = "false";
+defparam \audioR[13]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y28_N9
+cycloneiii_io_obuf \audioR[14]~output (
+	.i(\audioR[14]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioR[14]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioR[14]~output .bus_hold = "false";
+defparam \audioR[14]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y14_N9
+cycloneiii_io_obuf \audioR[15]~output (
+	.i(\audioR[15]~reg0_q ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioR[15]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioR[15]~output .bus_hold = "false";
+defparam \audioR[15]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X34_Y0_N23
+cycloneiii_io_obuf \audioM[0]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioM[0]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioM[0]~output .bus_hold = "false";
+defparam \audioM[0]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X49_Y34_N2
+cycloneiii_io_obuf \audioM[1]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioM[1]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioM[1]~output .bus_hold = "false";
+defparam \audioM[1]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X47_Y34_N23
+cycloneiii_io_obuf \audioM[2]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioM[2]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioM[2]~output .bus_hold = "false";
+defparam \audioM[2]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X43_Y0_N16
+cycloneiii_io_obuf \audioM[3]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioM[3]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioM[3]~output .bus_hold = "false";
+defparam \audioM[3]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y6_N23
+cycloneiii_io_obuf \audioM[4]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioM[4]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioM[4]~output .bus_hold = "false";
+defparam \audioM[4]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X7_Y0_N9
+cycloneiii_io_obuf \audioM[5]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioM[5]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioM[5]~output .bus_hold = "false";
+defparam \audioM[5]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X16_Y34_N9
+cycloneiii_io_obuf \audioM[6]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioM[6]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioM[6]~output .bus_hold = "false";
+defparam \audioM[6]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X53_Y24_N23
+cycloneiii_io_obuf \audioM[7]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioM[7]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioM[7]~output .bus_hold = "false";
+defparam \audioM[7]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X5_Y0_N23
+cycloneiii_io_obuf \audioM[8]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioM[8]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioM[8]~output .bus_hold = "false";
+defparam \audioM[8]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X14_Y0_N9
+cycloneiii_io_obuf \audioM[9]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioM[9]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioM[9]~output .bus_hold = "false";
+defparam \audioM[9]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X53_Y30_N9
+cycloneiii_io_obuf \audioM[10]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioM[10]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioM[10]~output .bus_hold = "false";
+defparam \audioM[10]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y11_N2
+cycloneiii_io_obuf \audioM[11]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioM[11]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioM[11]~output .bus_hold = "false";
+defparam \audioM[11]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X40_Y0_N9
+cycloneiii_io_obuf \audioM[12]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioM[12]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioM[12]~output .bus_hold = "false";
+defparam \audioM[12]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X53_Y19_N2
+cycloneiii_io_obuf \audioM[13]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioM[13]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioM[13]~output .bus_hold = "false";
+defparam \audioM[13]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X45_Y34_N9
+cycloneiii_io_obuf \audioM[14]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioM[14]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioM[14]~output .bus_hold = "false";
+defparam \audioM[14]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y5_N16
+cycloneiii_io_obuf \audioM[15]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\audioM[15]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \audioM[15]~output .bus_hold = "false";
+defparam \audioM[15]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOIBUF_X0_Y26_N15
+cycloneiii_io_ibuf \sclk~input (
+	.i(sclk),
+	.ibar(gnd),
+	.o(\sclk~input_o ));
+// synopsys translate_off
+defparam \sclk~input .bus_hold = "false";
+defparam \sclk~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X0_Y14_N15
+cycloneiii_io_ibuf \data~input (
+	.i(data),
+	.ibar(gnd),
+	.o(\data~input_o ));
+// synopsys translate_off
+defparam \data~input .bus_hold = "false";
+defparam \data~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: LCCOMB_X1_Y26_N20
+cycloneiii_lcell_comb \sample[0]~feeder (
+// Equation(s):
+// \sample[0]~feeder_combout  = \data~input_o 
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(\data~input_o ),
+	.cin(gnd),
+	.combout(\sample[0]~feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \sample[0]~feeder .lut_mask = 16'hFF00;
+defparam \sample[0]~feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X1_Y26_N21
+dffeas \sample[0] (
+	.clk(\sclk~input_o ),
+	.d(\sample[0]~feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(sample[0]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \sample[0] .is_wysiwyg = "true";
+defparam \sample[0] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X3_Y26_N12
+cycloneiii_lcell_comb \audioL[0]~reg0feeder (
+// Equation(s):
+// \audioL[0]~reg0feeder_combout  = sample[0]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[0]),
+	.cin(gnd),
+	.combout(\audioL[0]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioL[0]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioL[0]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X4_Y26_N16
+cycloneiii_lcell_comb \bitCount[0]~3 (
+// Equation(s):
+// \bitCount[0]~3_combout  = !bitCount[0]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(bitCount[0]),
+	.datad(gnd),
+	.cin(gnd),
+	.combout(\bitCount[0]~3_combout ),
+	.cout());
+// synopsys translate_off
+defparam \bitCount[0]~3 .lut_mask = 16'h0F0F;
+defparam \bitCount[0]~3 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X4_Y26_N17
+dffeas \bitCount[0] (
+	.clk(\sclk~input_o ),
+	.d(\bitCount[0]~3_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(bitCount[0]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \bitCount[0] .is_wysiwyg = "true";
+defparam \bitCount[0] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X4_Y26_N22
+cycloneiii_lcell_comb \bitCount[1]~2 (
+// Equation(s):
+// \bitCount[1]~2_combout  = bitCount[1] $ (bitCount[0])
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(bitCount[1]),
+	.datad(bitCount[0]),
+	.cin(gnd),
+	.combout(\bitCount[1]~2_combout ),
+	.cout());
+// synopsys translate_off
+defparam \bitCount[1]~2 .lut_mask = 16'h0FF0;
+defparam \bitCount[1]~2 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X4_Y26_N23
+dffeas \bitCount[1] (
+	.clk(\sclk~input_o ),
+	.d(\bitCount[1]~2_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(bitCount[1]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \bitCount[1] .is_wysiwyg = "true";
+defparam \bitCount[1] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X4_Y26_N26
+cycloneiii_lcell_comb \bitCount[2]~1 (
+// Equation(s):
+// \bitCount[2]~1_combout  = bitCount[2] $ (((bitCount[0] & bitCount[1])))
+
+	.dataa(bitCount[0]),
+	.datab(gnd),
+	.datac(bitCount[2]),
+	.datad(bitCount[1]),
+	.cin(gnd),
+	.combout(\bitCount[2]~1_combout ),
+	.cout());
+// synopsys translate_off
+defparam \bitCount[2]~1 .lut_mask = 16'h5AF0;
+defparam \bitCount[2]~1 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X4_Y26_N27
+dffeas \bitCount[2] (
+	.clk(\sclk~input_o ),
+	.d(\bitCount[2]~1_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(bitCount[2]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \bitCount[2] .is_wysiwyg = "true";
+defparam \bitCount[2] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X4_Y26_N24
+cycloneiii_lcell_comb \bitCount[3]~0 (
+// Equation(s):
+// \bitCount[3]~0_combout  = bitCount[3] $ (((bitCount[2] & (bitCount[1] & bitCount[0]))))
+
+	.dataa(bitCount[2]),
+	.datab(bitCount[1]),
+	.datac(bitCount[3]),
+	.datad(bitCount[0]),
+	.cin(gnd),
+	.combout(\bitCount[3]~0_combout ),
+	.cout());
+// synopsys translate_off
+defparam \bitCount[3]~0 .lut_mask = 16'h78F0;
+defparam \bitCount[3]~0 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X4_Y26_N25
+dffeas \bitCount[3] (
+	.clk(\sclk~input_o ),
+	.d(\bitCount[3]~0_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(bitCount[3]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \bitCount[3] .is_wysiwyg = "true";
+defparam \bitCount[3] .power_up = "low";
+// synopsys translate_on
+
+// Location: IOIBUF_X0_Y24_N15
+cycloneiii_io_ibuf \wrdclk~input (
+	.i(wrdclk),
+	.ibar(gnd),
+	.o(\wrdclk~input_o ));
+// synopsys translate_off
+defparam \wrdclk~input .bus_hold = "false";
+defparam \wrdclk~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: LCCOMB_X4_Y26_N28
+cycloneiii_lcell_comb \audioL[0]~0 (
+// Equation(s):
+// \audioL[0]~0_combout  = (!\wrdclk~input_o  & bitCount[1])
+
+	.dataa(gnd),
+	.datab(\wrdclk~input_o ),
+	.datac(gnd),
+	.datad(bitCount[1]),
+	.cin(gnd),
+	.combout(\audioL[0]~0_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioL[0]~0 .lut_mask = 16'h3300;
+defparam \audioL[0]~0 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X4_Y26_N4
+cycloneiii_lcell_comb \audioL[0]~1 (
+// Equation(s):
+// \audioL[0]~1_combout  = (bitCount[2] & (bitCount[3] & (bitCount[0] & \audioL[0]~0_combout )))
+
+	.dataa(bitCount[2]),
+	.datab(bitCount[3]),
+	.datac(bitCount[0]),
+	.datad(\audioL[0]~0_combout ),
+	.cin(gnd),
+	.combout(\audioL[0]~1_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioL[0]~1 .lut_mask = 16'h8000;
+defparam \audioL[0]~1 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X3_Y26_N13
+dffeas \audioL[0]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioL[0]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioL[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioL[0]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioL[0]~reg0 .is_wysiwyg = "true";
+defparam \audioL[0]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X1_Y26_N26
+cycloneiii_lcell_comb \sample[1]~feeder (
+// Equation(s):
+// \sample[1]~feeder_combout  = sample[0]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[0]),
+	.cin(gnd),
+	.combout(\sample[1]~feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \sample[1]~feeder .lut_mask = 16'hFF00;
+defparam \sample[1]~feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X1_Y26_N27
+dffeas \sample[1] (
+	.clk(\sclk~input_o ),
+	.d(\sample[1]~feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(sample[1]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \sample[1] .is_wysiwyg = "true";
+defparam \sample[1] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X3_Y26_N10
+cycloneiii_lcell_comb \audioL[1]~reg0feeder (
+// Equation(s):
+// \audioL[1]~reg0feeder_combout  = sample[1]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[1]),
+	.cin(gnd),
+	.combout(\audioL[1]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioL[1]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioL[1]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X3_Y26_N11
+dffeas \audioL[1]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioL[1]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioL[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioL[1]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioL[1]~reg0 .is_wysiwyg = "true";
+defparam \audioL[1]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X1_Y26_N16
+cycloneiii_lcell_comb \sample[2]~feeder (
+// Equation(s):
+// \sample[2]~feeder_combout  = sample[1]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(sample[1]),
+	.datad(gnd),
+	.cin(gnd),
+	.combout(\sample[2]~feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \sample[2]~feeder .lut_mask = 16'hF0F0;
+defparam \sample[2]~feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X1_Y26_N17
+dffeas \sample[2] (
+	.clk(\sclk~input_o ),
+	.d(\sample[2]~feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(sample[2]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \sample[2] .is_wysiwyg = "true";
+defparam \sample[2] .power_up = "low";
+// synopsys translate_on
+
+// Location: FF_X4_Y26_N13
+dffeas \audioL[2]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(gnd),
+	.asdata(sample[2]),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(vcc),
+	.ena(\audioL[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioL[2]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioL[2]~reg0 .is_wysiwyg = "true";
+defparam \audioL[2]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X1_Y26_N10
+cycloneiii_lcell_comb \sample[3]~feeder (
+// Equation(s):
+// \sample[3]~feeder_combout  = sample[2]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[2]),
+	.cin(gnd),
+	.combout(\sample[3]~feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \sample[3]~feeder .lut_mask = 16'hFF00;
+defparam \sample[3]~feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X1_Y26_N11
+dffeas \sample[3] (
+	.clk(\sclk~input_o ),
+	.d(\sample[3]~feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(sample[3]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \sample[3] .is_wysiwyg = "true";
+defparam \sample[3] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X3_Y26_N20
+cycloneiii_lcell_comb \audioL[3]~reg0feeder (
+// Equation(s):
+// \audioL[3]~reg0feeder_combout  = sample[3]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(sample[3]),
+	.datad(gnd),
+	.cin(gnd),
+	.combout(\audioL[3]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioL[3]~reg0feeder .lut_mask = 16'hF0F0;
+defparam \audioL[3]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X3_Y26_N21
+dffeas \audioL[3]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioL[3]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioL[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioL[3]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioL[3]~reg0 .is_wysiwyg = "true";
+defparam \audioL[3]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X1_Y26_N0
+cycloneiii_lcell_comb \sample[4]~feeder (
+// Equation(s):
+// \sample[4]~feeder_combout  = sample[3]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[3]),
+	.cin(gnd),
+	.combout(\sample[4]~feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \sample[4]~feeder .lut_mask = 16'hFF00;
+defparam \sample[4]~feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X1_Y26_N1
+dffeas \sample[4] (
+	.clk(\sclk~input_o ),
+	.d(\sample[4]~feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(sample[4]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \sample[4] .is_wysiwyg = "true";
+defparam \sample[4] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X4_Y26_N14
+cycloneiii_lcell_comb \audioL[4]~reg0feeder (
+// Equation(s):
+// \audioL[4]~reg0feeder_combout  = sample[4]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(sample[4]),
+	.datad(gnd),
+	.cin(gnd),
+	.combout(\audioL[4]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioL[4]~reg0feeder .lut_mask = 16'hF0F0;
+defparam \audioL[4]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X4_Y26_N15
+dffeas \audioL[4]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioL[4]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioL[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioL[4]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioL[4]~reg0 .is_wysiwyg = "true";
+defparam \audioL[4]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X1_Y26_N18
+cycloneiii_lcell_comb \sample[5]~feeder (
+// Equation(s):
+// \sample[5]~feeder_combout  = sample[4]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[4]),
+	.cin(gnd),
+	.combout(\sample[5]~feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \sample[5]~feeder .lut_mask = 16'hFF00;
+defparam \sample[5]~feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X1_Y26_N19
+dffeas \sample[5] (
+	.clk(\sclk~input_o ),
+	.d(\sample[5]~feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(sample[5]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \sample[5] .is_wysiwyg = "true";
+defparam \sample[5] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X3_Y26_N6
+cycloneiii_lcell_comb \audioL[5]~reg0feeder (
+// Equation(s):
+// \audioL[5]~reg0feeder_combout  = sample[5]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[5]),
+	.cin(gnd),
+	.combout(\audioL[5]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioL[5]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioL[5]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X3_Y26_N7
+dffeas \audioL[5]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioL[5]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioL[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioL[5]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioL[5]~reg0 .is_wysiwyg = "true";
+defparam \audioL[5]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X1_Y26_N4
+cycloneiii_lcell_comb \sample[6]~feeder (
+// Equation(s):
+// \sample[6]~feeder_combout  = sample[5]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[5]),
+	.cin(gnd),
+	.combout(\sample[6]~feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \sample[6]~feeder .lut_mask = 16'hFF00;
+defparam \sample[6]~feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X1_Y26_N5
+dffeas \sample[6] (
+	.clk(\sclk~input_o ),
+	.d(\sample[6]~feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(sample[6]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \sample[6] .is_wysiwyg = "true";
+defparam \sample[6] .power_up = "low";
+// synopsys translate_on
+
+// Location: FF_X4_Y26_N29
+dffeas \audioL[6]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(gnd),
+	.asdata(sample[6]),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(vcc),
+	.ena(\audioL[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioL[6]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioL[6]~reg0 .is_wysiwyg = "true";
+defparam \audioL[6]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X1_Y26_N2
+cycloneiii_lcell_comb \sample[7]~feeder (
+// Equation(s):
+// \sample[7]~feeder_combout  = sample[6]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(sample[6]),
+	.datad(gnd),
+	.cin(gnd),
+	.combout(\sample[7]~feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \sample[7]~feeder .lut_mask = 16'hF0F0;
+defparam \sample[7]~feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X1_Y26_N3
+dffeas \sample[7] (
+	.clk(\sclk~input_o ),
+	.d(\sample[7]~feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(sample[7]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \sample[7] .is_wysiwyg = "true";
+defparam \sample[7] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X3_Y26_N4
+cycloneiii_lcell_comb \audioL[7]~reg0feeder (
+// Equation(s):
+// \audioL[7]~reg0feeder_combout  = sample[7]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(sample[7]),
+	.datad(gnd),
+	.cin(gnd),
+	.combout(\audioL[7]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioL[7]~reg0feeder .lut_mask = 16'hF0F0;
+defparam \audioL[7]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X3_Y26_N5
+dffeas \audioL[7]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioL[7]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioL[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioL[7]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioL[7]~reg0 .is_wysiwyg = "true";
+defparam \audioL[7]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X1_Y26_N8
+cycloneiii_lcell_comb \sample[8]~feeder (
+// Equation(s):
+// \sample[8]~feeder_combout  = sample[7]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[7]),
+	.cin(gnd),
+	.combout(\sample[8]~feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \sample[8]~feeder .lut_mask = 16'hFF00;
+defparam \sample[8]~feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X1_Y26_N9
+dffeas \sample[8] (
+	.clk(\sclk~input_o ),
+	.d(\sample[8]~feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(sample[8]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \sample[8] .is_wysiwyg = "true";
+defparam \sample[8] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X4_Y26_N2
+cycloneiii_lcell_comb \audioL[8]~reg0feeder (
+// Equation(s):
+// \audioL[8]~reg0feeder_combout  = sample[8]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[8]),
+	.cin(gnd),
+	.combout(\audioL[8]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioL[8]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioL[8]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X4_Y26_N3
+dffeas \audioL[8]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioL[8]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioL[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioL[8]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioL[8]~reg0 .is_wysiwyg = "true";
+defparam \audioL[8]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X1_Y26_N6
+cycloneiii_lcell_comb \sample[9]~feeder (
+// Equation(s):
+// \sample[9]~feeder_combout  = sample[8]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(sample[8]),
+	.datad(gnd),
+	.cin(gnd),
+	.combout(\sample[9]~feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \sample[9]~feeder .lut_mask = 16'hF0F0;
+defparam \sample[9]~feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X1_Y26_N7
+dffeas \sample[9] (
+	.clk(\sclk~input_o ),
+	.d(\sample[9]~feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(sample[9]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \sample[9] .is_wysiwyg = "true";
+defparam \sample[9] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X4_Y26_N0
+cycloneiii_lcell_comb \audioL[9]~reg0feeder (
+// Equation(s):
+// \audioL[9]~reg0feeder_combout  = sample[9]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[9]),
+	.cin(gnd),
+	.combout(\audioL[9]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioL[9]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioL[9]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X4_Y26_N1
+dffeas \audioL[9]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioL[9]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioL[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioL[9]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioL[9]~reg0 .is_wysiwyg = "true";
+defparam \audioL[9]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X1_Y26_N24
+cycloneiii_lcell_comb \sample[10]~feeder (
+// Equation(s):
+// \sample[10]~feeder_combout  = sample[9]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[9]),
+	.cin(gnd),
+	.combout(\sample[10]~feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \sample[10]~feeder .lut_mask = 16'hFF00;
+defparam \sample[10]~feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X1_Y26_N25
+dffeas \sample[10] (
+	.clk(\sclk~input_o ),
+	.d(\sample[10]~feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(sample[10]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \sample[10] .is_wysiwyg = "true";
+defparam \sample[10] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X4_Y26_N6
+cycloneiii_lcell_comb \audioL[10]~reg0feeder (
+// Equation(s):
+// \audioL[10]~reg0feeder_combout  = sample[10]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(sample[10]),
+	.datad(gnd),
+	.cin(gnd),
+	.combout(\audioL[10]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioL[10]~reg0feeder .lut_mask = 16'hF0F0;
+defparam \audioL[10]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X4_Y26_N7
+dffeas \audioL[10]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioL[10]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioL[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioL[10]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioL[10]~reg0 .is_wysiwyg = "true";
+defparam \audioL[10]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X1_Y26_N22
+cycloneiii_lcell_comb \sample[11]~feeder (
+// Equation(s):
+// \sample[11]~feeder_combout  = sample[10]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[10]),
+	.cin(gnd),
+	.combout(\sample[11]~feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \sample[11]~feeder .lut_mask = 16'hFF00;
+defparam \sample[11]~feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X1_Y26_N23
+dffeas \sample[11] (
+	.clk(\sclk~input_o ),
+	.d(\sample[11]~feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(sample[11]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \sample[11] .is_wysiwyg = "true";
+defparam \sample[11] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X4_Y26_N20
+cycloneiii_lcell_comb \audioL[11]~reg0feeder (
+// Equation(s):
+// \audioL[11]~reg0feeder_combout  = sample[11]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[11]),
+	.cin(gnd),
+	.combout(\audioL[11]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioL[11]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioL[11]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X4_Y26_N21
+dffeas \audioL[11]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioL[11]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioL[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioL[11]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioL[11]~reg0 .is_wysiwyg = "true";
+defparam \audioL[11]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X1_Y26_N12
+cycloneiii_lcell_comb \sample[12]~feeder (
+// Equation(s):
+// \sample[12]~feeder_combout  = sample[11]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(sample[11]),
+	.datad(gnd),
+	.cin(gnd),
+	.combout(\sample[12]~feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \sample[12]~feeder .lut_mask = 16'hF0F0;
+defparam \sample[12]~feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X1_Y26_N13
+dffeas \sample[12] (
+	.clk(\sclk~input_o ),
+	.d(\sample[12]~feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(sample[12]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \sample[12] .is_wysiwyg = "true";
+defparam \sample[12] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X4_Y26_N30
+cycloneiii_lcell_comb \audioL[12]~reg0feeder (
+// Equation(s):
+// \audioL[12]~reg0feeder_combout  = sample[12]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[12]),
+	.cin(gnd),
+	.combout(\audioL[12]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioL[12]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioL[12]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X4_Y26_N31
+dffeas \audioL[12]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioL[12]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioL[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioL[12]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioL[12]~reg0 .is_wysiwyg = "true";
+defparam \audioL[12]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X1_Y26_N30
+cycloneiii_lcell_comb \sample[13]~feeder (
+// Equation(s):
+// \sample[13]~feeder_combout  = sample[12]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[12]),
+	.cin(gnd),
+	.combout(\sample[13]~feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \sample[13]~feeder .lut_mask = 16'hFF00;
+defparam \sample[13]~feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X1_Y26_N31
+dffeas \sample[13] (
+	.clk(\sclk~input_o ),
+	.d(\sample[13]~feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(sample[13]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \sample[13] .is_wysiwyg = "true";
+defparam \sample[13] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X4_Y26_N8
+cycloneiii_lcell_comb \audioL[13]~reg0feeder (
+// Equation(s):
+// \audioL[13]~reg0feeder_combout  = sample[13]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[13]),
+	.cin(gnd),
+	.combout(\audioL[13]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioL[13]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioL[13]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X4_Y26_N9
+dffeas \audioL[13]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioL[13]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioL[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioL[13]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioL[13]~reg0 .is_wysiwyg = "true";
+defparam \audioL[13]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X1_Y26_N28
+cycloneiii_lcell_comb \sample[14]~feeder (
+// Equation(s):
+// \sample[14]~feeder_combout  = sample[13]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(sample[13]),
+	.datad(gnd),
+	.cin(gnd),
+	.combout(\sample[14]~feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \sample[14]~feeder .lut_mask = 16'hF0F0;
+defparam \sample[14]~feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X1_Y26_N29
+dffeas \sample[14] (
+	.clk(\sclk~input_o ),
+	.d(\sample[14]~feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(sample[14]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \sample[14] .is_wysiwyg = "true";
+defparam \sample[14] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X4_Y26_N10
+cycloneiii_lcell_comb \audioL[14]~reg0feeder (
+// Equation(s):
+// \audioL[14]~reg0feeder_combout  = sample[14]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(sample[14]),
+	.datad(gnd),
+	.cin(gnd),
+	.combout(\audioL[14]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioL[14]~reg0feeder .lut_mask = 16'hF0F0;
+defparam \audioL[14]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X4_Y26_N11
+dffeas \audioL[14]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioL[14]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioL[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioL[14]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioL[14]~reg0 .is_wysiwyg = "true";
+defparam \audioL[14]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X1_Y26_N14
+cycloneiii_lcell_comb \sample[15]~feeder (
+// Equation(s):
+// \sample[15]~feeder_combout  = sample[14]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[14]),
+	.cin(gnd),
+	.combout(\sample[15]~feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \sample[15]~feeder .lut_mask = 16'hFF00;
+defparam \sample[15]~feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X1_Y26_N15
+dffeas \sample[15] (
+	.clk(\sclk~input_o ),
+	.d(\sample[15]~feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(sample[15]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \sample[15] .is_wysiwyg = "true";
+defparam \sample[15] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X3_Y26_N2
+cycloneiii_lcell_comb \audioL[15]~reg0feeder (
+// Equation(s):
+// \audioL[15]~reg0feeder_combout  = sample[15]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[15]),
+	.cin(gnd),
+	.combout(\audioL[15]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioL[15]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioL[15]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X3_Y26_N3
+dffeas \audioL[15]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioL[15]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioL[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioL[15]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioL[15]~reg0 .is_wysiwyg = "true";
+defparam \audioL[15]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X3_Y26_N28
+cycloneiii_lcell_comb \audioR[0]~reg0feeder (
+// Equation(s):
+// \audioR[0]~reg0feeder_combout  = sample[0]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[0]),
+	.cin(gnd),
+	.combout(\audioR[0]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioR[0]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioR[0]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X4_Y26_N18
+cycloneiii_lcell_comb \audioR[0]~0 (
+// Equation(s):
+// \audioR[0]~0_combout  = (bitCount[2] & (bitCount[3] & (bitCount[1] & bitCount[0])))
+
+	.dataa(bitCount[2]),
+	.datab(bitCount[3]),
+	.datac(bitCount[1]),
+	.datad(bitCount[0]),
+	.cin(gnd),
+	.combout(\audioR[0]~0_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioR[0]~0 .lut_mask = 16'h8000;
+defparam \audioR[0]~0 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X4_Y26_N12
+cycloneiii_lcell_comb \audioR[0]~1 (
+// Equation(s):
+// \audioR[0]~1_combout  = (\wrdclk~input_o  & \audioR[0]~0_combout )
+
+	.dataa(gnd),
+	.datab(\wrdclk~input_o ),
+	.datac(gnd),
+	.datad(\audioR[0]~0_combout ),
+	.cin(gnd),
+	.combout(\audioR[0]~1_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioR[0]~1 .lut_mask = 16'hCC00;
+defparam \audioR[0]~1 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X3_Y26_N29
+dffeas \audioR[0]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioR[0]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioR[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioR[0]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioR[0]~reg0 .is_wysiwyg = "true";
+defparam \audioR[0]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X3_Y26_N14
+cycloneiii_lcell_comb \audioR[1]~reg0feeder (
+// Equation(s):
+// \audioR[1]~reg0feeder_combout  = sample[1]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[1]),
+	.cin(gnd),
+	.combout(\audioR[1]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioR[1]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioR[1]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X3_Y26_N15
+dffeas \audioR[1]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioR[1]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioR[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioR[1]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioR[1]~reg0 .is_wysiwyg = "true";
+defparam \audioR[1]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X5_Y26_N4
+cycloneiii_lcell_comb \audioR[2]~reg0feeder (
+// Equation(s):
+// \audioR[2]~reg0feeder_combout  = sample[2]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[2]),
+	.cin(gnd),
+	.combout(\audioR[2]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioR[2]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioR[2]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X5_Y26_N5
+dffeas \audioR[2]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioR[2]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioR[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioR[2]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioR[2]~reg0 .is_wysiwyg = "true";
+defparam \audioR[2]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X3_Y26_N0
+cycloneiii_lcell_comb \audioR[3]~reg0feeder (
+// Equation(s):
+// \audioR[3]~reg0feeder_combout  = sample[3]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(sample[3]),
+	.datad(gnd),
+	.cin(gnd),
+	.combout(\audioR[3]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioR[3]~reg0feeder .lut_mask = 16'hF0F0;
+defparam \audioR[3]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X3_Y26_N1
+dffeas \audioR[3]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioR[3]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioR[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioR[3]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioR[3]~reg0 .is_wysiwyg = "true";
+defparam \audioR[3]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X5_Y26_N6
+cycloneiii_lcell_comb \audioR[4]~reg0feeder (
+// Equation(s):
+// \audioR[4]~reg0feeder_combout  = sample[4]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[4]),
+	.cin(gnd),
+	.combout(\audioR[4]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioR[4]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioR[4]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X5_Y26_N7
+dffeas \audioR[4]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioR[4]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioR[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioR[4]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioR[4]~reg0 .is_wysiwyg = "true";
+defparam \audioR[4]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X3_Y26_N18
+cycloneiii_lcell_comb \audioR[5]~reg0feeder (
+// Equation(s):
+// \audioR[5]~reg0feeder_combout  = sample[5]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[5]),
+	.cin(gnd),
+	.combout(\audioR[5]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioR[5]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioR[5]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X3_Y26_N19
+dffeas \audioR[5]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioR[5]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioR[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioR[5]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioR[5]~reg0 .is_wysiwyg = "true";
+defparam \audioR[5]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X3_Y26_N8
+cycloneiii_lcell_comb \audioR[6]~reg0feeder (
+// Equation(s):
+// \audioR[6]~reg0feeder_combout  = sample[6]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(sample[6]),
+	.datad(gnd),
+	.cin(gnd),
+	.combout(\audioR[6]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioR[6]~reg0feeder .lut_mask = 16'hF0F0;
+defparam \audioR[6]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X3_Y26_N9
+dffeas \audioR[6]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioR[6]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioR[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioR[6]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioR[6]~reg0 .is_wysiwyg = "true";
+defparam \audioR[6]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X3_Y26_N26
+cycloneiii_lcell_comb \audioR[7]~reg0feeder (
+// Equation(s):
+// \audioR[7]~reg0feeder_combout  = sample[7]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(sample[7]),
+	.datad(gnd),
+	.cin(gnd),
+	.combout(\audioR[7]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioR[7]~reg0feeder .lut_mask = 16'hF0F0;
+defparam \audioR[7]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X3_Y26_N27
+dffeas \audioR[7]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioR[7]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioR[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioR[7]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioR[7]~reg0 .is_wysiwyg = "true";
+defparam \audioR[7]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X5_Y26_N8
+cycloneiii_lcell_comb \audioR[8]~reg0feeder (
+// Equation(s):
+// \audioR[8]~reg0feeder_combout  = sample[8]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(sample[8]),
+	.datad(gnd),
+	.cin(gnd),
+	.combout(\audioR[8]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioR[8]~reg0feeder .lut_mask = 16'hF0F0;
+defparam \audioR[8]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X5_Y26_N9
+dffeas \audioR[8]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioR[8]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioR[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioR[8]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioR[8]~reg0 .is_wysiwyg = "true";
+defparam \audioR[8]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X3_Y26_N16
+cycloneiii_lcell_comb \audioR[9]~reg0feeder (
+// Equation(s):
+// \audioR[9]~reg0feeder_combout  = sample[9]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(sample[9]),
+	.datad(gnd),
+	.cin(gnd),
+	.combout(\audioR[9]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioR[9]~reg0feeder .lut_mask = 16'hF0F0;
+defparam \audioR[9]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X3_Y26_N17
+dffeas \audioR[9]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioR[9]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioR[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioR[9]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioR[9]~reg0 .is_wysiwyg = "true";
+defparam \audioR[9]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X5_Y26_N22
+cycloneiii_lcell_comb \audioR[10]~reg0feeder (
+// Equation(s):
+// \audioR[10]~reg0feeder_combout  = sample[10]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[10]),
+	.cin(gnd),
+	.combout(\audioR[10]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioR[10]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioR[10]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X5_Y26_N23
+dffeas \audioR[10]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioR[10]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioR[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioR[10]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioR[10]~reg0 .is_wysiwyg = "true";
+defparam \audioR[10]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X5_Y26_N12
+cycloneiii_lcell_comb \audioR[11]~reg0feeder (
+// Equation(s):
+// \audioR[11]~reg0feeder_combout  = sample[11]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[11]),
+	.cin(gnd),
+	.combout(\audioR[11]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioR[11]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioR[11]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X5_Y26_N13
+dffeas \audioR[11]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioR[11]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioR[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioR[11]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioR[11]~reg0 .is_wysiwyg = "true";
+defparam \audioR[11]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X3_Y26_N22
+cycloneiii_lcell_comb \audioR[12]~reg0feeder (
+// Equation(s):
+// \audioR[12]~reg0feeder_combout  = sample[12]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[12]),
+	.cin(gnd),
+	.combout(\audioR[12]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioR[12]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioR[12]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X3_Y26_N23
+dffeas \audioR[12]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioR[12]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioR[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioR[12]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioR[12]~reg0 .is_wysiwyg = "true";
+defparam \audioR[12]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X5_Y26_N10
+cycloneiii_lcell_comb \audioR[13]~reg0feeder (
+// Equation(s):
+// \audioR[13]~reg0feeder_combout  = sample[13]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[13]),
+	.cin(gnd),
+	.combout(\audioR[13]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioR[13]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioR[13]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X5_Y26_N11
+dffeas \audioR[13]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioR[13]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioR[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioR[13]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioR[13]~reg0 .is_wysiwyg = "true";
+defparam \audioR[13]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X3_Y26_N24
+cycloneiii_lcell_comb \audioR[14]~reg0feeder (
+// Equation(s):
+// \audioR[14]~reg0feeder_combout  = sample[14]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(sample[14]),
+	.datad(gnd),
+	.cin(gnd),
+	.combout(\audioR[14]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioR[14]~reg0feeder .lut_mask = 16'hF0F0;
+defparam \audioR[14]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X3_Y26_N25
+dffeas \audioR[14]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioR[14]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioR[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioR[14]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioR[14]~reg0 .is_wysiwyg = "true";
+defparam \audioR[14]~reg0 .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X3_Y26_N30
+cycloneiii_lcell_comb \audioR[15]~reg0feeder (
+// Equation(s):
+// \audioR[15]~reg0feeder_combout  = sample[15]
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(sample[15]),
+	.cin(gnd),
+	.combout(\audioR[15]~reg0feeder_combout ),
+	.cout());
+// synopsys translate_off
+defparam \audioR[15]~reg0feeder .lut_mask = 16'hFF00;
+defparam \audioR[15]~reg0feeder .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: FF_X3_Y26_N31
+dffeas \audioR[15]~reg0 (
+	.clk(\sclk~input_o ),
+	.d(\audioR[15]~reg0feeder_combout ),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(\audioR[0]~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\audioR[15]~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \audioR[15]~reg0 .is_wysiwyg = "true";
+defparam \audioR[15]~reg0 .power_up = "low";
+// synopsys translate_on
+
+assign audioL[0] = \audioL[0]~output_o ;
+
+assign audioL[1] = \audioL[1]~output_o ;
+
+assign audioL[2] = \audioL[2]~output_o ;
+
+assign audioL[3] = \audioL[3]~output_o ;
+
+assign audioL[4] = \audioL[4]~output_o ;
+
+assign audioL[5] = \audioL[5]~output_o ;
+
+assign audioL[6] = \audioL[6]~output_o ;
+
+assign audioL[7] = \audioL[7]~output_o ;
+
+assign audioL[8] = \audioL[8]~output_o ;
+
+assign audioL[9] = \audioL[9]~output_o ;
+
+assign audioL[10] = \audioL[10]~output_o ;
+
+assign audioL[11] = \audioL[11]~output_o ;
+
+assign audioL[12] = \audioL[12]~output_o ;
+
+assign audioL[13] = \audioL[13]~output_o ;
+
+assign audioL[14] = \audioL[14]~output_o ;
+
+assign audioL[15] = \audioL[15]~output_o ;
+
+assign audioR[0] = \audioR[0]~output_o ;
+
+assign audioR[1] = \audioR[1]~output_o ;
+
+assign audioR[2] = \audioR[2]~output_o ;
+
+assign audioR[3] = \audioR[3]~output_o ;
+
+assign audioR[4] = \audioR[4]~output_o ;
+
+assign audioR[5] = \audioR[5]~output_o ;
+
+assign audioR[6] = \audioR[6]~output_o ;
+
+assign audioR[7] = \audioR[7]~output_o ;
+
+assign audioR[8] = \audioR[8]~output_o ;
+
+assign audioR[9] = \audioR[9]~output_o ;
+
+assign audioR[10] = \audioR[10]~output_o ;
+
+assign audioR[11] = \audioR[11]~output_o ;
+
+assign audioR[12] = \audioR[12]~output_o ;
+
+assign audioR[13] = \audioR[13]~output_o ;
+
+assign audioR[14] = \audioR[14]~output_o ;
+
+assign audioR[15] = \audioR[15]~output_o ;
+
+assign audioM[0] = \audioM[0]~output_o ;
+
+assign audioM[1] = \audioM[1]~output_o ;
+
+assign audioM[2] = \audioM[2]~output_o ;
+
+assign audioM[3] = \audioM[3]~output_o ;
+
+assign audioM[4] = \audioM[4]~output_o ;
+
+assign audioM[5] = \audioM[5]~output_o ;
+
+assign audioM[6] = \audioM[6]~output_o ;
+
+assign audioM[7] = \audioM[7]~output_o ;
+
+assign audioM[8] = \audioM[8]~output_o ;
+
+assign audioM[9] = \audioM[9]~output_o ;
+
+assign audioM[10] = \audioM[10]~output_o ;
+
+assign audioM[11] = \audioM[11]~output_o ;
+
+assign audioM[12] = \audioM[12]~output_o ;
+
+assign audioM[13] = \audioM[13]~output_o ;
+
+assign audioM[14] = \audioM[14]~output_o ;
+
+assign audioM[15] = \audioM[15]~output_o ;
+
+endmodule
